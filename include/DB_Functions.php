@@ -127,6 +127,34 @@ class DB_Functions {
         return $hash;
     }
 
+
+    /**
+     * Get Books
+     */
+    public function getBooks() {
+        $host = "https://blxusedbooks.000webhostapp.com/images/";
+        $stmt = $this->conn->prepare("SELECT id, name, authorName, edition, cost, imageUrl FROM books");
+
+        if ($stmt->execute()) {
+            $stmt->bind_result($id, $name, $authorName, $edition, $cost, $imageUrl);
+            $books = array();
+            /* fetch values */
+            while ($stmt->fetch()) {
+                $books[] = array(
+                        'id' => $id,
+                        'name' => $name,
+                        'authorName' => $authorName,
+                        'edition' => $edition,
+                        'cost' => $cost,
+                        'imageUrl'=> $host . $imageUrl
+                    );
+            }
+            return $books;
+        } else {
+            return NULL;
+        }
+    }
+
 }
 
 ?>

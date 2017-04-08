@@ -7,44 +7,14 @@
  
 // array for JSON response
 $response = array();
- 
-// include db connect class
-require_once __DIR__ . '/db_connect.php';
- 
-// connecting to db
-$db = new DB_CONNECT();
- 
-// get all products from products table
-$result = mysql_query("SELECT * FROM books") or die(mysql_error());
- 
-// check for empty result
-if (mysql_num_rows($result) > 0) {
-    // looping through all results
-    // products node
-    $response["books"] = array();
- 
-    while ($row = mysql_fetch_array($result)) {
-        // temp user array
-        $books = array();
-        //$books["pid"] = $row["pid"];
-        $books["name"] = $row["name"];
-        $books["cost"] = $row["cost"];
-        //image 
- 
-        // push single product into final response array
-        array_push($response["books"], $books);
-    }
-    // success
-    $response["success"] = 1;
- 
-    // echoing JSON response
-    echo json_encode($response);
+require_once 'include/DB_Functions.php';
+$db = new DB_Functions();
+
+$books = $db->getBooks();
+if ($books) {
+    echo json_encode(array('books' => $books));
 } else {
-    // no products found
-    $response["success"] = 0;
-    $response["message"] = "No books found";
- 
-    // echo no users JSON
-    echo json_encode($response);
+  echo json_encode(array('books' => array()));   
 }
+ 
 ?>
