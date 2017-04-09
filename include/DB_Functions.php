@@ -155,31 +155,23 @@ class DB_Functions {
         }
     }
 
-     public function storeBook($name, $authorName, $edition, $cost, $imageUrl) {
-        $uuid = uniqid('', true);
-        
+     public function storeBook($name, $authorName, $cost, $imageUrl, $edition) {
+        $stmt = $this->conn->prepare("INSERT INTO books (name, authorName, edition, cost, imageUrl, user_id )
+         VALUES (?, ?, ?, ?, ?, 1)");
 
-        $stmt = $this->conn->prepare("INSERT INTO books(name, authorName, eition,cost,imageUrl) VALUES(?, ?, ?, ?,?)");
         $stmt->bind_param("sssss", $name, $authorName, $edition, $cost, $imageUrl);
+
         $result = $stmt->execute();
+
         $stmt->close();
 
         // check for successful store
         if ($result) {
-            $stmt = $this->conn->prepare("SELECT * FROM books WHERE name = ?");
-            $stmt->bind_param("s", $name);
-            $stmt->execute();
-            $user = $stmt->get_result()->fetch_assoc();
-            $stmt->close();
-
-            return $books;
+            return true;
         } else {
             return false;
         }
     }
-
-   
-
 }
 
 ?>

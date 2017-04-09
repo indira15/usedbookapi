@@ -2,8 +2,8 @@
 -- version 4.6.6
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 08, 2017 at 05:24 PM
+-- Host: localhost:3306
+-- Generation Time: Apr 09, 2017 at 05:02 PM
 -- Server version: 10.1.20-MariaDB
 -- PHP Version: 7.0.8
 
@@ -32,8 +32,18 @@ CREATE TABLE `books` (
   `authorName` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `edition` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `cost` float NOT NULL,
-  `user_id` int(250) NOT NULL
+  `user_id` int(250) NOT NULL,
+  `imageUrl` varchar(250) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `books`
+--
+
+INSERT INTO `books` (`id`, `name`, `authorName`, `edition`, `cost`, `user_id`, `imageUrl`) VALUES
+(1, 'Android Development', 'James Mathew', 'Silver Jubliee', 20, 1, 'android_dev.jpeg'),
+(2, 'iPhone Development', 'Chandler Bing', '1st', 200, 1, 'iphone_dev.png'),
+(3, 'C Programming', 'Balaguruswamy', '2nd', 110, 0, 'cbook.jpg');
 
 -- --------------------------------------------------------
 
@@ -73,11 +83,18 @@ INSERT INTO `users` (`id`, `unique_id`, `name`, `email`, `encrypted_password`, `
 (9, '58e52f7e3c8933.68354657', 'Pearl', 'pearl@gmail.com', 'vc27tlgSPEUoZ6pMwgDEOv9GAuMyYWI5NmE5NjI0', '2ab96a9624', '2017-04-05 17:55:10', '2017-04-05 17:55:10', 999999999, 888888888, 'erode', 'indira nagar', 'tn'),
 (10, '58e531ea4889a4.12464841', '123', '123@gmail.com', 'LTLDnyjrqDu6O724yYAc/qHpc4thYzdkMmJjNzE4', 'ac7d2bc718', '2017-04-05 18:05:30', '2017-04-05 18:05:30', 12345, 12345, '123', '123', '123'),
 (11, '58e6344d0d3916.03488077', 'rahul', 'rahul@gmail.com', 'GurjUMTp+8XYdlFJN2y2xSMvVcUwY2NkODAwYmRh', '0ccd800bda', '2017-04-06 12:27:57', '2017-04-06 12:27:57', 123456789, 231429455, 'erode', '15  laxmi nagar', 'tn'),
-(12, '58e63e88befa82.30640070', 'Arun', 'arun@gmail.com', 'DLWHuVLak5HF4TyGV5uYUdh+NeZmMGJjODI1N2Q3', 'f0bc8257d7', '2017-04-06 13:11:36', '2017-04-06 13:11:36', 2147483647, 2147483647, 'coimbatore', '101 laxmi street', 'tamilnadu');
+(12, '58e63e88befa82.30640070', 'Arun', 'arun@gmail.com', 'DLWHuVLak5HF4TyGV5uYUdh+NeZmMGJjODI1N2Q3', 'f0bc8257d7', '2017-04-06 13:11:36', '2017-04-06 13:11:36', 2147483647, 2147483647, 'coimbatore', '101 laxmi street', 'tamilnadu'),
+(13, '58ea5efb778473.72405390', 'kiran', 'kiran@gmail.com', '2kCey678YELa5jqJTwRmwkaI7Hg1MWIwY2IwNzEw', '51b0cb0710', '2017-04-09 16:19:07', '2017-04-09 16:19:07', 2147483647, 2147483647, 'jodhpur', 'bjs colony', 'rajashtan');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `books`
+--
+ALTER TABLE `books`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -92,10 +109,15 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `books`
+--
+ALTER TABLE `books`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
